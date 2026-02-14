@@ -23,6 +23,12 @@
    ".part.sidebar .composite.title": {
       "padding": "8px 20px 0 0 !important"
    },
+   ".part.sidebar .title-label h2": {
+      "font-size": "12px !important",
+      "font-weight": "700 !important",
+      "text-transform": "uppercase !important",
+      "letter-spacing": "1px !important"
+   },
    ".part.sidebar .content": {
       "width": "calc(100% - 20px) !important"
    },
@@ -151,7 +157,7 @@
       "display": "flex !important",
       "align-items": "center !important",
       "justify-content": "center !important",
-      "overflow": "hidden !important"
+      "overflow": "visible !important"
    },
    ".part.activitybar .action-item .action-label .codicon": {
       "font-size": "18px !important"
@@ -173,12 +179,20 @@
    ".part.activitybar .actions-container": {
       "align-items": "center !important",
       "justify-content": "center !important",
-      "width": "100% !important"
+      "width": "100% !important",
+      "overflow": "visible !important"
    },
    ".part.activitybar .action-item": {
       "display": "flex !important",
       "justify-content": "center !important",
-      "width": "100% !important"
+      "width": "100% !important",
+      "overflow": "visible !important"
+   },
+   ".part.activitybar .badge": {
+      "z-index": "10 !important",
+      "overflow": "visible !important",
+      "transform": "scale(0.8) !important",
+      "transform-origin": "top right !important"
    },
    ".part.titlebar": {
       "background-color": "#131217 !important"
@@ -304,5 +318,5 @@
    ".tab.active .tab-actions": {
       "opacity": "1 !important"
    }
-}
+  }
 }
