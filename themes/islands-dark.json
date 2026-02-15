@@ -178,9 +178,10 @@
     "editorSuggestWidget.border": "#3c3f41",
     "editorSuggestWidget.highlightForeground": "#548af7",
     "editorSuggestWidget.selectedBackground": "#25324d",
-    "editorHoverWidget.background": "#2b2d30",
+    "editorHoverWidget.background": "#161619",
     "editorHoverWidget.foreground": "#bcbec4",
-    "editorHoverWidget.border": "#3c3f41",
+    "editorHoverWidget.border": "#16161900",
+    "editorHoverWidget.statusBarBackground": "#141416",
 
     "peekView.border": "#548af7",
     "peekViewEditor.background": "#181a1d",
