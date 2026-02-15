@@ -24,7 +24,7 @@ A dark color theme for Visual Studio Code inspired by JetBrains' Islands Dark th
 - Pill-shaped scrollbar thumbs
 - Color-matched icon glow effect (works best with [Seti Folder](https://marketplace.visualstudio.com/items?itemName=l-igh-t.vscode-theme-seti-folder) icon theme)
 - Warm syntax highlighting with comprehensive language support (JS/TS, Python, Go, Rust, HTML/CSS, JSON, YAML, Markdown)
-- Geist Mono font throughout
+- IBM Plex Mono in the editor, FiraCode Nerd Font Mono in the terminal
 
 ![Islands Dark Screenshot UI](assets/CleanShot%202026-02-14%20at%2021.45.00@2x.png)
 
@@ -75,7 +75,7 @@ The scripts will automatically:
 - ✅ Merge settings into your VS Code: configuration
 - ✅ Enable Custom UI Style and reload VS Code:
 
-> **Note:** Geist Mono font must be installed separately from [vercel.com/font](https://vercel.com/font) (the script will remind you).
+> **Note:** IBM Plex Mono and FiraCode Nerd Font Mono must be installed separately (the script will remind you).
 
 ### Manual Installation
 
@@ -114,7 +114,8 @@ For the best experience with the color-matched icon glow effect, install the **S
 
 This theme uses two fonts:
 
-- **[Geist Mono](https://vercel.com/font)** — used in the editor and terminal
+- **IBM Plex Mono** — used in the editor
+- **FiraCode Nerd Font Mono** — used in the terminal
 - **Bear Sans UI** — used in the sidebar, tabs, command center, and status bar (included in `fonts/` folder)
 
 To install Bear Sans UI:
