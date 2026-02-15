@@ -3,7 +3,7 @@
   "displayName": "Islands Dark",
   "description": "A dark color theme inspired by JetBrains Islands Dark — deep backgrounds, warm syntax highlighting, and a clean modern aesthetic.",
   "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "publisher": "bwya77",
   "license": "MIT",
   "engines": {
     "vscode": "^1.60.0"

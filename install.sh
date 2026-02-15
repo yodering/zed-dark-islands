@@ -14,25 +14,32 @@ NC='\033[0m' # No Color
 
 # Check if code command is available
 if ! command -v code &> /dev/null; then
-    echo -e "${RED}❌ Error: VS Code: CLI (code) not found!${NC}"
-    echo "Please install VS Code: and make sure 'code' command is in your PATH."
+    echo -e "${RED}❌ Error: VS Code CLI (code) not found!${NC}"
+    echo "Please install VS Code and make sure 'code' command is in your PATH."
     echo "You can do this by:"
-    echo "  1. Open VS Code:"
+    echo "  1. Open VS Code"
     echo "  2. Press Cmd+Shift+P (macOS) or Ctrl+Shift+P (Linux)"
     echo "  3. Type 'Shell Command: Install code command in PATH'"
     exit 1
 fi
 
-echo -e "${GREEN}✓ VS Code: CLI found${NC}"
+echo -e "${GREEN}✓ VS Code CLI found${NC}"
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo ""
 echo "📦 Step 1: Installing Islands Dark theme extension..."
-cd "$SCRIPT_DIR"
-if code --install-extension . --force; then
-    echo -e "${GREEN}✓ Theme extension installed${NC}"
+
+# Install by copying to VS Code extensions directory
+EXT_DIR="$HOME/.vscode/extensions/bwya77.islands-dark-1.0.0"
+rm -rf "$EXT_DIR"
+mkdir -p "$EXT_DIR"
+cp "$SCRIPT_DIR/package.json" "$EXT_DIR/"
+cp -r "$SCRIPT_DIR/themes" "$EXT_DIR/"
+
+if [ -d "$EXT_DIR/themes" ]; then
+    echo -e "${GREEN}✓ Theme extension installed to $EXT_DIR${NC}"
 else
     echo -e "${RED}❌ Failed to install theme extension${NC}"
     exit 1
@@ -70,7 +77,7 @@ else
 fi
 
 echo ""
-echo "⚙️  Step 4: Applying VS Code: settings..."
+echo "⚙️  Step 4: Applying VS Code settings..."
 SETTINGS_DIR="$HOME/.config/Code/User"
 if [[ "$OSTYPE" == "darwin"* ]]; then
     SETTINGS_DIR="$HOME/Library/Application Support/Code/User"
@@ -84,10 +91,10 @@ if [ -f "$SETTINGS_FILE" ]; then
     echo -e "${YELLOW}⚠️  Existing settings.json found${NC}"
     echo "   Backing up to settings.json.backup"
     cp "$SETTINGS_FILE" "$SETTINGS_FILE.backup"
-    
+
     # Read the existing settings and merge
     echo "   Merging Islands Dark settings with your existing settings..."
-    
+
     # Create a temporary file with the merge logic using node.js if available
     if command -v node &> /dev/null; then
         node << 'NODE_SCRIPT'
@@ -110,12 +117,12 @@ const existingSettings = JSON.parse(fs.readFileSync(settingsFile, 'utf8'));
 // Merge settings - Islands Dark settings take precedence
 const mergedSettings = { ...existingSettings, ...newSettings };
 
-// Special handling for custom-ui-style.stylesheet to merge properly
-if (existingSettings['custom-ui-style'] && existingSettings['custom-ui-style'].stylesheet) {
-    if (!mergedSettings['custom-ui-style']) mergedSettings['custom-ui-style'] = {};
-    mergedSettings['custom-ui-style'].stylesheet = {
-        ...existingSettings['custom-ui-style'].stylesheet,
-        ...newSettings['custom-ui-style'].stylesheet
+// Deep merge custom-ui-style.stylesheet
+const stylesheetKey = 'custom-ui-style.stylesheet';
+if (existingSettings[stylesheetKey] && newSettings[stylesheetKey]) {
+    mergedSettings[stylesheetKey] = {
+        ...existingSettings[stylesheetKey],
+        ...newSettings[stylesheetKey]
     };
 }
 
@@ -123,7 +130,7 @@ fs.writeFileSync(settingsFile, JSON.stringify(mergedSettings, null, 2));
 console.log('Settings merged successfully');
 NODE_SCRIPT
     else
-        echo -e "${YELLOW}   Node.js not found. Please manually merge settings.json from this repo into your VS Code: settings.${NC}"
+        echo -e "${YELLOW}   Node.js not found. Please manually merge settings.json from this repo into your VS Code settings.${NC}"
         echo "   Your original settings have been backed up to settings.json.backup"
     fi
 else
@@ -134,7 +141,7 @@ fi
 
 echo ""
 echo "🚀 Step 5: Enabling Custom UI Style..."
-echo "   VS Code: will reload after applying changes..."
+echo "   VS Code will reload after applying changes..."
 
 # Create a flag file to indicate first run
 FIRST_RUN_FILE="$SCRIPT_DIR/.islands_dark_first_run"
@@ -142,30 +149,29 @@ if [ ! -f "$FIRST_RUN_FILE" ]; then
     touch "$FIRST_RUN_FILE"
     echo ""
     echo -e "${YELLOW}📝 Important Notes:${NC}"
-    echo "   • Geist Mono font needs to be installed separately from: https://vercel.com/font"
-    echo "   • After VS Code: reloads, you may see a 'corrupt installation' warning"
+    echo "   • IBM Plex Mono and FiraCode Nerd Font Mono need to be installed separately"
+    echo "   • After VS Code reloads, you may see a 'corrupt installation' warning"
     echo "   • This is expected - click the gear icon and select 'Don't Show Again'"
-    echo "   • If you need to install Geist Mono, do so now before VS Code: reloads"
     echo ""
-    read -p "Press Enter to continue and reload VS Code:..."
+    read -p "Press Enter to continue and reload VS Code..."
 fi
 
 # Apply custom UI style
 echo "   Applying CSS customizations..."
 
-# Reload VS Code: to apply changes
+# Reload VS Code to apply changes
 echo -e "${GREEN}✓ Setup complete!${NC}"
 echo ""
 echo "🎉 Islands Dark theme has been installed!"
-echo "   VS Code: will now reload to apply the custom UI style."
+echo "   VS Code will now reload to apply the custom UI style."
 echo ""
 
-# Use AppleScript on macOS to show a notification and reload VS Code:
+# Use AppleScript on macOS to show a notification and reload VS Code
 if [[ "$OSTYPE" == "darwin"* ]]; then
     osascript -e 'display notification "Islands Dark theme installed successfully!" with title "🏝️ Islands Dark"' 2>/dev/null || true
 fi
 
-echo "   Reloading VS Code:..."
+echo "   Reloading VS Code..."
 code --reload-window 2>/dev/null || code . 2>/dev/null || true
 
 echo ""

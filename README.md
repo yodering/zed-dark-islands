@@ -83,15 +83,25 @@ If you prefer to install manually, follow these steps:
 
 #### Step 1: Install the theme
 
-Clone this repo and install the theme as a local extension:
+Clone this repo and copy the extension files:
 
 ```bash
 git clone https://github.com/bwya77/vscode-dark-islands.git islands-dark
 cd islands-dark
-code --install-extension .
+mkdir -p ~/.vscode/extensions/bwya77.islands-dark-1.0.0
+cp package.json ~/.vscode/extensions/bwya77.islands-dark-1.0.0/
+cp -r themes ~/.vscode/extensions/bwya77.islands-dark-1.0.0/
 ```
 
-Alternatively, copy the `themes/islands-dark.json` file into a VS Code: extension manually.
+On Windows (PowerShell):
+```powershell
+git clone https://github.com/bwya77/vscode-dark-islands.git islands-dark
+cd islands-dark
+$ext = "$env:USERPROFILE\.vscode\extensions\bwya77.islands-dark-1.0.0"
+New-Item -ItemType Directory -Path $ext -Force
+Copy-Item package.json $ext\
+Copy-Item themes $ext\themes -Recurse
+```
 
 #### Step 2: Install the Custom UI Style extension
 
