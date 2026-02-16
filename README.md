@@ -10,7 +10,9 @@
 
 ## **THIS THEME IS STILL A WORK IN PROGRESS**
 
-A dark color theme for Visual Studio Code inspired by JetBrains' Islands Dark theme. Features floating glass-like panels, rounded corners, smooth animations, and a deeply refined UI.
+A dark color theme for Visual Studio Code and Zed inspired by JetBrains' Islands Dark theme. Features floating glass-like panels, rounded corners, smooth animations, and a deeply refined UI.
+
+**Now available for Zed!** See the [Zed theme installation instructions](zed-theme/README.md).
 
 ![Islands Dark Screenshot](assets/CleanShot%202026-02-14%20at%2021.47.05@2x.png)
 
@@ -30,7 +32,7 @@ A dark color theme for Visual Studio Code inspired by JetBrains' Islands Dark th
 
 ![Islands Dark Screenshot UI](assets/CleanShot%202026-02-14%20at%2021.45.00@2x.png)
 
-## Installation
+## Installation for VS Code
 
 This theme has two parts: a **color theme** and **CSS customizations** that create the floating glass panel look.
 
@@ -187,6 +189,18 @@ This is expected after enabling Custom UI Style. Dismiss it or select **Don't Sh
 
 ### Previously used "Custom CSS and JS Loader" extension
 If you previously used the **Custom CSS and JS Loader** extension (`be5invis.vscode-custom-css`), it may have injected CSS directly into VS Code's `workbench.html` that persists even after disabling. If styles conflict, reinstall VS Code to get a clean `workbench.html`, then use only **Custom UI Style**.
+
+## Installation for Zed
+
+For Zed users, see the complete installation instructions in the [zed-theme folder](zed-theme/README.md).
+
+**Quick install (macOS/Linux):**
+```bash
+mkdir -p ~/.config/zed/themes
+cp zed-theme/islands-dark.json ~/.config/zed/themes/
+```
+
+Then select "Islands Dark" from Zed's theme picker (`Cmd+K` then `Cmd+T`).
 
 ## Credits
 
